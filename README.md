@@ -1,20 +1,30 @@
-# Glacier: Easy Website Management
+# Glacier: Advanced Website Management Tool
 
-Glacier is a powerful, user-friendly command-line tool designed to simplify website management using Docker containers. It automates the process of setting up, deploying, and managing multiple websites on a single server, handling Nginx configurations, SSL certificates, and PHP environments with ease.
+Glacier is a powerful, user-friendly command-line tool designed to simplify website management using Docker containers. It automates the process of setting up, deploying, and managing multiple websites across single or multiple servers, handling Nginx configurations, SSL certificates, PHP environments, databases, and more.
 
 ## Features
 
 - Easy setup and management of multiple websites
 - Automatic Nginx configuration generation
-- SSL certificate management with Let's Encrypt
-- Support for PHP-based websites
+- SSL certificate management (including wildcard SSL)
+- Support for multiple PHP versions (7.4, 8.0, 8.1, 8.2, 8.3)
 - Git integration for easy deployment
 - Docker-based isolation for security and resource management
-- Interactive CLI for user-friendly operation
+- Database creation and management
+- Website backup and restore functionality
+- Staging environment creation and promotion
+- FTP access setup
+- Website statistics with GoAccess
+- Redis setup
+- CDN setup assistance
+- Monitoring with Prometheus and Grafana
+- Multi-server support
+- Docker image management
+- Plugin system for extensibility
+- Cross-platform support (Linux and Windows)
 
 ## Prerequisites
 
-- Ubuntu-based system (tested on Ubuntu 20.04 LTS)
 - Python 3.6 or higher
 - Docker and Docker Compose (will be installed automatically if not present)
 
@@ -26,110 +36,98 @@ Glacier is a powerful, user-friendly command-line tool designed to simplify webs
    cd glacier
    ```
 
-2. Make the script executable:
+2. Run the Glacier script:
    ```
-   chmod +x glacier.py
+   python glacier.py
    ```
+
+The script will automatically install all required dependencies.
 
 ## Usage
 
-Run the Glacier script:
+Running `glacier.py` will launch an interactive menu with the following options:
 
-```
-./glacier.py
-```
+1. Create website
+2. Rebuild website
+3. Create database
+4. Delete database
+5. Backup website
+6. Restore website
+7. Add custom Nginx config
+8. Setup website statistics
+9. Setup FTP access
+10. Create staging environment
+11. Promote staging to production
+12. Setup wildcard SSL
+13. Setup Redis
+14. Setup CDN
+15. Setup monitoring
+16. Setup alerts
+17. Add server
+18. Remove server
+19. List servers
+20. Pull Docker image
+21. List Docker images
+22. Remove Docker image
+23. Run plugin
+24. Exit
 
-This will launch an interactive menu with the following options:
+## Key Features Explained
 
-1. **Setup Glacier**: Initialize Glacier and install prerequisites
-2. **Create a new website**: Set up a new website
-3. **Rebuild an existing website**: Update an existing website
-4. **Start Glacier services**: Start all Docker containers
-5. **Stop Glacier services**: Stop all Docker containers
-6. **View website logs**: Display logs for a specific website
-7. **Delete a website**: Remove a website and its configuration
-8. **Install PHP extension**: Add a new PHP extension to the environment
-9. **Uninstall Glacier**: Remove Glacier and all associated data
-10. **Exit**: Quit the Glacier application
+### Multi-PHP Support
+Glacier supports PHP versions 7.4, 8.0, 8.1, 8.2, and 8.3, allowing you to choose the appropriate version for each website.
 
-## Commands
+### Database Management
+Easily create and delete MySQL databases for your websites.
 
-### Setup
+### Backup and Restore
+Create backups of your websites and restore them when needed.
 
-Initializes Glacier, installs prerequisites, and sets up the Docker environment.
+### Staging Environments
+Create staging environments for testing changes before pushing to production.
 
-### Create a new website
+### SSL Certificates
+Manage SSL certificates, including support for wildcard SSL.
 
-Creates a new website. You'll be prompted for:
-- Domain name
-- Git repository URL (optional)
-- Whether to skip SSL setup
+### Website Statistics
+Set up GoAccess for real-time web analytics.
 
-### Rebuild an existing website
+### FTP Access
+Quickly set up FTP access for your websites.
 
-Updates an existing website. You'll be prompted for:
-- Domain name
-- Git repository URL to update from (optional)
-- Whether to reconfigure SSL
-- Whether to force rebuild without confirmation
+### CDN Integration
+Get guidance on setting up Content Delivery Networks for your websites.
 
-### Start Glacier services
+### Monitoring and Alerts
+Set up Prometheus and Grafana for monitoring, with customizable alerts.
 
-Starts all Docker containers associated with Glacier.
+### Multi-Server Support
+Manage websites across multiple servers from a single Glacier instance.
 
-### Stop Glacier services
+### Docker Management
+Pull, list, and remove Docker images directly from the Glacier interface.
 
-Stops all Docker containers associated with Glacier.
+### Plugin System
+Extend Glacier's functionality with custom plugins.
 
-### View website logs
+## Directory Structure
 
-Displays logs for a specific website. You'll be prompted for the domain name.
-
-### Delete a website
-
-Removes a website and its configuration. You'll be prompted for:
-- Domain name
-- Whether to force deletion without confirmation
-
-### Install PHP extension
-
-Installs a new PHP extension. You'll be prompted for the extension name.
-
-### Uninstall Glacier
-
-Removes Glacier and all associated data. You'll be asked to confirm this action.
-
-## How It Works
-
-Glacier uses Docker to create isolated environments for each website. It automatically generates Nginx configurations, manages SSL certificates using Let's Encrypt, and provides an easy-to-use interface for common website management tasks.
-
-The application creates the following directory structure:
-
-```
 glacier/
 ├── nginx/
 ├── sites/
 ├── certs/
+├── backups/
 ├── docker-compose.yml
-└── Dockerfile-php
-```
-
-- `nginx/`: Contains Nginx configuration files for each website
-- `sites/`: Stores the actual website files
-- `certs/`: Stores SSL certificates
-- `docker-compose.yml`: Defines the Docker services
-- `Dockerfile-php`: Defines the PHP environment
-
-## SSL Certificates
-
-Glacier uses Let's Encrypt for SSL certificates. When setting up SSL for a domain, you'll be prompted to create a TXT record for DNS verification. The script will guide you through this process.
+├── Dockerfile-php
+└── plugins/
 
 ## Troubleshooting
 
 If you encounter any issues:
-1. Check the logs using the "View website logs" option
+1. Check the logs for the specific service or website
 2. Ensure your domain's DNS is correctly configured
-3. Verify that ports 80 and 443 are open on your server
+3. Verify that required ports are open on your server(s)
+4. For Windows-specific issues, consider using Windows Subsystem for Linux (WSL)
 
 ## Contributing
 
