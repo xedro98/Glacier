@@ -113,12 +113,19 @@ Extend Glacier's functionality with custom plugins.
 ## Directory Structure
 
 glacier/
+
 ├── nginx/
+
 ├── sites/
+
 ├── certs/
+
 ├── backups/
+
 ├── docker-compose.yml
+
 ├── Dockerfile-php
+
 └── plugins/
 
 ## Troubleshooting
